@@ -2,9 +2,155 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
-</head>
-<body>
+    <title>{Title}{block:PostSummary} : {PostSummary}{/block:PostSummary}</title>
+<style type="text/css">
+body {
+    font: 16px/1.4 'Helvetica Heue', sans-serif;
+
+    background-color: whitesmoke;
+}
+.top {
+
+}
+.sidebar {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+    bottom: 0;
+
+    padding: 5px;
+    width: 10px;
+
+    background-color: #FF0070;
+
+    box-sizing: border-box;
+
+    color: #666;
+
+    z-index: 2;
+}
+.content {
+    position: absolute;
     
+    top: 0;
+    left: 10px;
+    bottom: 0;
+
+    padding-top: 40px;
+
+    width: 600px;
+
+    background-color: white;
+    color: #333;
+
+    box-sizing: border-box;
+
+    overflow: auto;
+}
+.right {
+    position: absolute;
+
+    top: 0;
+    left: 610px;
+    right: 0;
+    bottom: 0;
+
+    padding: 80px 50px 30px;
+
+    box-sizing: border-box;
+
+    min-width: 300px;
+}
+.page__header {
+    margin: 0 0 10px;
+    padding: 5px 0;
+
+    font: 22px/1.1 bold 'Helvetica Heue', sans-serif;
+}
+.post {
+
+    margin: 0 45px;
+    padding: 30px 0 20px;
+
+    box-sizing: border-box;
+
+    border-bottom: 1px solid #ddd;
+}
+.post__header {
+    margin: 0 0 10px;
+    padding: 5px 0;
+
+    font: 32px/1.1 bold 'Helvetica Heue', sans-serif;
+}
+.footer {
+    height: 40px;
+
+    border-top: 1px solid #777;
+
+    font: 20px/40px 'Helvetica Heue', sans-serif;
+
+    text-align: center;
+    color: #EEE;
+    background-color: #333;
+}
+a:link,
+a:visited,
+.link:link, 
+.link:visited {
+    color: #1FAEFF;
+    text-decoration: none;
+    border-bottom: 1px solid #EEE;
+}
+a:hover,
+a:active,
+.link:hover, 
+.link:active {
+    color: red;
+    border-width: 0;
+}
+.arrow {
+    color: #EEE;
+    
+    text-decoration: none;
+
+    border-bottom: 1px solid whitesmoke;
+}
+.arrow:hover {
+    color: #888;
+    border-bottom: 1px solid #888;
+}
+</style>
+</head>
+<body class="page">
+    <div class="sidebar"></div>
+    <div class="right">
+        <h1 class="page__header"><a class="link" href="/">{Title}</a></h1>
+        <p>{Description}</p>
+    </div>
+    <div class="content">
+        {block:Posts}
+        <div class="post {TagsAsClasses}">
+            {block:Regular}
+                <div class="post-body text-post">
+                    {block:Title}
+                        <h3 class="post__header">{Title}</h3>
+                    {/block:Title}
+                    <div class="post__message">
+                    {Body}
+                    </div>
+                </div>
+            {/block:Regular}
+        </div>
+        {/block:Posts}
+        <footer class="footer">
+          {block:PreviousPage}
+          <a href="{PreviousPage}" title="{lang:Newer posts}" class="arrow">&larr;</a>
+          {/block:PreviousPage}
+          {block:NextPage}
+          <a href="{NextPage}" title="{lang:Older posts}" class="arrow">&rarr;</a>
+          {/block:NextPage}
+        </footer>
+    </div>
 </body>
 </html>
