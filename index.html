@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>{Title}{block:PostSummary} : {PostSummary}{/block:PostSummary}</title>
+    {block:Description}
+        <meta name="description" content="{MetaDescription}" />
+    {/block:Description}
 <style type="text/css">
 body {
     font: 16px/1.4 'Helvetica Heue', sans-serif;
@@ -24,6 +27,7 @@ body {
 
     background-color: #FF0070;
 
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
 
     color: #666;
@@ -44,6 +48,7 @@ body {
     background-color: white;
     color: #333;
 
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
 
     overflow: auto;
@@ -58,6 +63,7 @@ body {
 
     padding: 80px 50px 30px;
 
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
 
     min-width: 300px;
@@ -120,27 +126,88 @@ a:active,
     color: #888;
     border-bottom: 1px solid #888;
 }
+.date {
+    display: inline-block;
+    padding: 8px;
+    
+    margin-bottom: 16px;
+    margin-left: -45px;
+    
+    color: #111;
+    font: 12px bold 'Helvetica Heue', sans-serif;
+    background-color: #F3F3F3;
+}
 </style>
 </head>
 <body class="page">
     <div class="sidebar"></div>
     <div class="right">
         <h1 class="page__header"><a class="link" href="/">{Title}</a></h1>
-        <p>{Description}</p>
+        {block:Description}
+            <p>{Description}</p>
+        {/block:Description}
     </div>
     <div class="content">
         {block:Posts}
         <div class="post {TagsAsClasses}">
+            <div class="date">{DayOfMonth} / {MonthNumber} / {Year}</div>
             {block:Regular}
-                <div class="post-body text-post">
+                <div class="post__body text-post">
                     {block:Title}
                         <h3 class="post__header">{Title}</h3>
                     {/block:Title}
-                    <div class="post__message">
+                    <div class="text-post__message">
                     {Body}
                     </div>
                 </div>
             {/block:Regular}
+            {block:Quote}
+                    <div class="post__body quote">
+                        "{Quote}"
+
+                        {block:Source}
+                            <div class="quote__source">{Source}</div>
+                        {/block:Source}
+                    </div>
+            {/block:Quote}
+            {block:Link}
+                    <div class="post__body link-post">
+                        <a href="{URL}" class="link" {Target}>{Name}</a>
+
+                        {block:Description}
+                            <div class="link-post__description">{Description}</div>
+                        {/block:Description}
+                    </div>
+            {/block:Link}
+            {block:Chat}
+                    <div class="post__body chat">
+                        {block:Title}
+                            <h3 class="post__header"><a href="{Permalink}">{Title}</a></h3>
+                        {/block:Title}
+
+                        <ul class="chat">
+                            {block:Lines}
+                                <li class="{Alt} user_{UserNumber}">
+                                    {block:Label}
+                                        <span class="label">{Label}</span>
+                                    {/block:Label}{Line}
+                                </li>
+                            {/block:Lines}
+                        </ul>
+                    </div>
+                {/block:Chat}{block:Video}
+                    <div class="post__body video">
+                        {Video-500}{block:Caption}
+                            <div class="video__caption">{Caption}</div>
+                        {/block:Caption}
+                    </div>
+                {/block:Video}{block:Audio}
+                    <div class="post__body audio">
+                        {AudioPlayerBlack}{block:Caption}
+                            <div class="audio__caption">{Caption}</div>
+                        {/block:Caption}
+                    </div>
+                {/block:Audio}
         </div>
         {/block:Posts}
         <footer class="footer">
